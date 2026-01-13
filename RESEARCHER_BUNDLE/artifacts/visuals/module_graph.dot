@@ -1,0 +1,39 @@
+digraph LeanEthereumPQ {
+  rankdir=TB;
+  node [shape=box, style="rounded,filled", fontname="Arial"];
+  edge [color="#64748b"];
+
+  // Subgraphs for clustering
+  subgraph cluster_pq {
+    label="Post-Quantum Signatures";
+    style=dashed;
+    color="#ef4444";
+    IncomparableEncoding [fillcolor="#ef444420", color="#ef4444"];
+    Poseidon2 [fillcolor="#ef444420", color="#ef4444"];
+    XMSS [fillcolor="#ef444420", color="#ef4444"];
+  }
+
+  subgraph cluster_piop {
+    label="Polynomial IOPs";
+    style=dashed;
+    color="#8b5cf6";
+    Multilinear [fillcolor="#8b5cf620", color="#8b5cf6"];
+    Sumcheck [fillcolor="#8b5cf620", color="#8b5cf6"];
+    FiatShamir [fillcolor="#8b5cf620", color="#8b5cf6"];
+  }
+
+  subgraph cluster_blockchain {
+    label="Blockchain / Payment Channels";
+    style=dashed;
+    color="#22c55e";
+    MessageModelSeq [fillcolor="#22c55e20", color="#22c55e"];
+    PostQuantumHTLC [fillcolor="#22c55e20", color="#22c55e"];
+  }
+
+  // Edges
+  XMSS -> IncomparableEncoding;
+  Sumcheck -> Multilinear;
+  FiatShamir -> Sumcheck;
+  PostQuantumHTLC -> MessageModelSeq;
+  PostQuantumHTLC -> XMSS;
+}

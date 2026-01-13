@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lean Ethereum PQ Crypto - 3D Module Graph</title>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #0f172a; color: white; }
+        h1 { text-align: center; }
+        #graph { width: 100%; height: 600px; border: 1px solid #334155; border-radius: 8px; }
+        .legend { display: flex; justify-content: center; gap: 30px; margin: 20px 0; }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Lean Ethereum Post-Quantum Crypto Module Graph</h1>
+    <div class="legend">
+        <div class="legend-item"><div class="legend-color" style="background:#ef4444"></div>Post-Quantum Signatures</div>
+        <div class="legend-item"><div class="legend-color" style="background:#8b5cf6"></div>Polynomial IOPs</div>
+        <div class="legend-item"><div class="legend-color" style="background:#22c55e"></div>Blockchain</div>
+    </div>
+    <div id="graph"></div>
+    <script>
+        var nodes = new vis.DataSet([{"id": "IncomparableEncoding", "label": "IncomparableEncoding", "x": -100, "y": -80, "z": 0, "color": "#ef4444", "namespace": "Crypto.PostQuantum"}, {"id": "Poseidon2", "label": "Poseidon2", "x": -60, "y": 0, "z": 0, "color": "#ef4444", "namespace": "Crypto.PostQuantum"}, {"id": "XMSS", "label": "XMSS", "x": -100, "y": 80, "z": 0, "color": "#ef4444", "namespace": "Crypto.PostQuantum"}, {"id": "Multilinear", "label": "Multilinear", "x": 140, "y": -80, "z": 0, "color": "#8b5cf6", "namespace": "Crypto.PIOP"}, {"id": "Sumcheck", "label": "Sumcheck", "x": 100, "y": 0, "z": 0, "color": "#8b5cf6", "namespace": "Crypto.PIOP"}, {"id": "FiatShamir", "label": "FiatShamir", "x": 140, "y": 80, "z": 0, "color": "#8b5cf6", "namespace": "Crypto.PIOP"}, {"id": "MessageModelSeq", "label": "MessageModelSeq", "x": 0, "y": -80, "z": 100, "color": "#22c55e", "namespace": "Blockchain.Bridge"}, {"id": "PostQuantumHTLC", "label": "PostQuantumHTLC", "x": 40, "y": 0, "z": 100, "color": "#22c55e", "namespace": "Blockchain.PaymentChannels"}]);
+        var edges = new vis.DataSet([{"from": "XMSS", "to": "IncomparableEncoding"}, {"from": "Sumcheck", "to": "Multilinear"}, {"from": "FiatShamir", "to": "Sumcheck"}, {"from": "PostQuantumHTLC", "to": "MessageModelSeq"}, {"from": "PostQuantumHTLC", "to": "XMSS"}]);
+        var container = document.getElementById('graph');
+        var data = { nodes: nodes, edges: edges };
+        var options = {
+            nodes: {
+                shape: 'box',
+                font: { color: 'white', size: 14 },
+                borderWidth: 2,
+                shadow: true
+            },
+            edges: {
+                arrows: 'to',
+                color: '#64748b',
+                width: 2
+            },
+            physics: {
+                enabled: true,
+                barnesHut: { gravitationalConstant: -2000 }
+            },
+            interaction: { hover: true }
+        };
+        var network = new vis.Network(container, data, options);
+    </script>
+</body>
+</html>
