@@ -210,7 +210,8 @@ The foundation for modern zkSNARKs/STARKs. Our specification includes:
 
 ## License
 
-This work is released under the MIT License. See [LICENSE](LICENSE) for details.
+This project is provided under the Apoth3osis License Stack v1.
+See `LICENSE.md` and the files under `licenses/`.
 
 ## Acknowledgments
 
